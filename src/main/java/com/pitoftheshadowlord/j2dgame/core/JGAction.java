@@ -26,6 +26,10 @@ public abstract class JGAction {
         return done;
     }
 
+    public boolean isPaused() {
+        return paused;
+    }
+
     public void pause() {
         paused = true;
     }
