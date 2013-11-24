@@ -2,10 +2,9 @@ package com.pitoftheshadowlord.j2dgame.actions;
 
 import java.awt.Point;
 
-import com.pitoftheshadowlord.j2dgame.core.JGAction;
 import com.pitoftheshadowlord.j2dgame.core.JGObject;
 
-public class JGMoveTo extends JGAction {
+public class JGMoveTo extends JGDurationAction {
 
     private Point dstPoint;
     private Point srcPoint;
@@ -25,6 +24,9 @@ public class JGMoveTo extends JGAction {
         super(duration);
         this.dstPoint = point;
     }
+
+    public void begin() {}
+    public void end() {}
 
     @Override
     public void update(double delta) {
