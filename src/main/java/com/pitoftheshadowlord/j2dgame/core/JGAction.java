@@ -9,6 +9,8 @@ public abstract class JGAction {
     public JGAction() { }
 
     public abstract void update(double deleta);
+    public abstract void begin();
+    public abstract void end();
 
     public JGObject getTarget() {
         return target;

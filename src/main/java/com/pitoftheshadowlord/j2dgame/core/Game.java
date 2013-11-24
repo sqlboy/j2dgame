@@ -77,7 +77,12 @@ public class Game extends Canvas implements Runnable {
             if (actions != null) {
                 for (ListIterator<JGAction> actionIter = actions.listIterator(); actionIter.hasNext();) {
                     JGAction action = actionIter.next();
-                    if (action.isDone() || action.isPaused()) {
+                    if (action.isDone()) {
+                        action.end();
+                        actionIter.remove();
+                        continue;
+                    }
+                    if (action.isPaused()) {
                         continue;
                     }
                     action.update(delta);
