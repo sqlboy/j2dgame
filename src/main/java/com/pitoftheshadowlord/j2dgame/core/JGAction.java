@@ -6,11 +6,7 @@ public abstract class JGAction {
     protected boolean done;
     protected JGObject target;
 
-    protected final float durationTime;
-
-    public JGAction(float duration) {
-        this.durationTime = duration * 60.0f;
-    }
+    public JGAction() { }
 
     public abstract void update(double deleta);
 
