@@ -17,22 +17,28 @@ public class ExampleScene extends JGScene {
 
         float speed = 0.75f;
 
-        BlinkingSquare blink = new BlinkingSquare(10, 10, 75);
+        BlinkingSquare blink = new BlinkingSquare(0, 0, 75)
+            .setColorOff(Color.MAGENTA)
+            .setColorOn(Color.CYAN);
+
         addChild(blink);
 
         JGActionChain chain = new JGActionChain()
-            .addAction(new JGMoveTo(speed, new Point(100, 100)))
-            .addAction(new JGMoveTo(speed, new Point(10, 10)))
-            .addAction(new JGMoveTo(speed, new Point(100, 100)))
+            .addAction(new JGMoveTo(speed, new Point(75, 75)))
+            .addAction(new JGMoveTo(speed, new Point(0, 0)))
+            .addAction(new JGMoveTo(speed, new Point(75, 75)))
             .addAction(new JGMoveTo(speed, new Point(0, 0)));
 
-        BlinkingSquare blink2 = new BlinkingSquare(100, 100, 75);
+        BlinkingSquare blink2 = new BlinkingSquare(75, 75, 75)
+            .setColorOff(Color.YELLOW)
+            .setColorOn(Color.GREEN);
+
         addChild(blink2);
 
         JGActionChain chain2 = new JGActionChain()
-            .addAction(new JGMoveBy(speed, new Point(-90, -90)))
-            .addAction(new JGMoveBy(speed, new Point(90, 90)))
-            .addAction(new JGMoveBy(speed, new Point(-90, -90)))
+            .addAction(new JGMoveBy(speed, new Point(-75, -75)))
+            .addAction(new JGMoveBy(speed, new Point(75, 75)))
+            .addAction(new JGMoveBy(speed, new Point(-75, -75)))
             .addAction(new JGMoveTo(speed, new Point(75, 0)));
 
         blink.runAction(chain);
