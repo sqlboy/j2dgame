@@ -5,8 +5,8 @@ import java.awt.Graphics;
 import java.awt.Point;
 
 import com.pitoftheshadowlord.j2dgame.actions.JGActionChain;
+import com.pitoftheshadowlord.j2dgame.actions.JGMoveBy;
 import com.pitoftheshadowlord.j2dgame.actions.JGMoveTo;
-import com.pitoftheshadowlord.j2dgame.core.JGAction;
 import com.pitoftheshadowlord.j2dgame.core.JGScene;
 
 public class ExampleScene extends JGScene {
@@ -15,20 +15,26 @@ public class ExampleScene extends JGScene {
 
     public void load() {
 
-        BlinkingSquare blink = new BlinkingSquare(10, 10, 100);
+        BlinkingSquare blink = new BlinkingSquare(10, 10, 75);
         addChild(blink);
 
-        FadingSquare fade = new FadingSquare(120, 10, 100);
-        addChild(fade);
-
         JGActionChain chain = new JGActionChain()
-            .addAction(new JGMoveTo(1f, new Point(120, 100)))
-            .addAction(new JGMoveTo(1f, new Point(180, 100)));
+            .addAction(new JGMoveTo(1f, new Point(100, 100)))
+            .addAction(new JGMoveTo(1f, new Point(10, 10)))
+            .addAction(new JGMoveTo(1f, new Point(100, 100)))
+            .addAction(new JGMoveTo(1f, new Point(0, 0)));
+
+        BlinkingSquare blink2 = new BlinkingSquare(100, 100, 75);
+        addChild(blink2);
+
+        JGActionChain chain2 = new JGActionChain()
+            .addAction(new JGMoveBy(1f, new Point(-90, -90)))
+            .addAction(new JGMoveBy(1f, new Point(90, 90)))
+            .addAction(new JGMoveBy(1f, new Point(-90, -90)))
+            .addAction(new JGMoveTo(1f, new Point(75, 0)));
 
         blink.runAction(chain);
-
-        JGAction action2 = new JGMoveTo(1f, new Point(10, 100));
-        fade.runAction(action2);
+        blink2.runAction(chain2);
     }
 
     public void render(Graphics g) {
