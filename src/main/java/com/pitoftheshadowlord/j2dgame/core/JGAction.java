@@ -2,6 +2,7 @@ package com.pitoftheshadowlord.j2dgame.core;
 
 public abstract class JGAction {
 
+    protected boolean paused;
     protected boolean done;
     protected JGObject target;
 
@@ -19,6 +20,13 @@ public abstract class JGAction {
 
     public void setTarget(JGObject target) {
         this.target = target;
+    }
 
+    public void pause() {
+        paused = true;
+    }
+
+    public void resume() {
+        paused = false;
     }
 }
