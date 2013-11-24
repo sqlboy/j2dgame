@@ -15,23 +15,25 @@ public class ExampleScene extends JGScene {
 
     public void load() {
 
+        float speed = 0.75f;
+
         BlinkingSquare blink = new BlinkingSquare(10, 10, 75);
         addChild(blink);
 
         JGActionChain chain = new JGActionChain()
-            .addAction(new JGMoveTo(1f, new Point(100, 100)))
-            .addAction(new JGMoveTo(1f, new Point(10, 10)))
-            .addAction(new JGMoveTo(1f, new Point(100, 100)))
-            .addAction(new JGMoveTo(1f, new Point(0, 0)));
+            .addAction(new JGMoveTo(speed, new Point(100, 100)))
+            .addAction(new JGMoveTo(speed, new Point(10, 10)))
+            .addAction(new JGMoveTo(speed, new Point(100, 100)))
+            .addAction(new JGMoveTo(speed, new Point(0, 0)));
 
         BlinkingSquare blink2 = new BlinkingSquare(100, 100, 75);
         addChild(blink2);
 
         JGActionChain chain2 = new JGActionChain()
-            .addAction(new JGMoveBy(1f, new Point(-90, -90)))
-            .addAction(new JGMoveBy(1f, new Point(90, 90)))
-            .addAction(new JGMoveBy(1f, new Point(-90, -90)))
-            .addAction(new JGMoveTo(1f, new Point(75, 0)));
+            .addAction(new JGMoveBy(speed, new Point(-90, -90)))
+            .addAction(new JGMoveBy(speed, new Point(90, 90)))
+            .addAction(new JGMoveBy(speed, new Point(-90, -90)))
+            .addAction(new JGMoveTo(speed, new Point(75, 0)));
 
         blink.runAction(chain);
         blink2.runAction(chain2);
