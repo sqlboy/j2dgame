@@ -43,7 +43,7 @@ public class JGMoveBy extends JGDurationAction {
 
         if (totalTime < durationTime) {
             if (totalTime + delta > durationTime) {
-                delta = (durationTime - totalTime) + 0.1;
+                delta = (durationTime - totalTime) + 0.001;
             }
 
             totalTime+=(delta);
