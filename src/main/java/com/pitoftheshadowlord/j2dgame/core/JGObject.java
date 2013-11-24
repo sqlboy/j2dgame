@@ -117,7 +117,6 @@ public class JGObject implements Comparable<JGObject>{
         return rect.getLocation();
     }
 
-
     public void move(Point p) {
         rect.setLocation(rect.x + p.x, rect.y + p.y);
     }
@@ -161,14 +160,12 @@ public class JGObject implements Comparable<JGObject>{
     public boolean within(Rectangle r) {
         Point p = rect.getLocation();
         return r.contains(p.x - renderOffset.x, p.y - renderOffset.y);
-
     }
 
     public int distanceFrom(Rectangle r) {
         Point p = rect.getLocation();
         return (int) Point.distance(p.x, p.y, r.x, r.y);
     }
-
 
     public boolean contains(Point point) {
         Rectangle r = new Rectangle(rect.x - renderOffset.x, rect.y - renderOffset.y, rect.width, rect.height);

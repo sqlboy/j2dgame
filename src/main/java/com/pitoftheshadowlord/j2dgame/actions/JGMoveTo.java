@@ -12,9 +12,6 @@ public class JGMoveTo extends JGMoveBy {
         super(duration, point);
     }
 
-    public void begin() {}
-    public void end() {}
-
     public void setTarget(JGObject target) {
         this.target = target;
         this.srcPoint = new Point(target.getPosition());

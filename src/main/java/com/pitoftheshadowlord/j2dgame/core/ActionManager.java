@@ -24,7 +24,6 @@ public class ActionManager {
             actions = Lists.newArrayList();
             actionMap.put(target.id, actions);
         }
-        System.out.println("adding action: " + action);
         actions.add(action);
         action.begin();
     }

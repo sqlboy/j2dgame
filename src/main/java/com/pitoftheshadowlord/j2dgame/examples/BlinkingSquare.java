@@ -15,6 +15,7 @@ public class BlinkingSquare extends JGObject {
     }
 
     public void render(Graphics g) {
+
         g.setColor(color);
         g.fillRect(rect.x, rect.y, rect.width, rect.height);
     }
