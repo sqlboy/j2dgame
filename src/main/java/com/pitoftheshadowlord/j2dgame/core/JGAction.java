@@ -22,6 +22,10 @@ public abstract class JGAction {
         this.target = target;
     }
 
+    public boolean isDone() {
+        return done;
+    }
+
     public void pause() {
         paused = true;
     }
