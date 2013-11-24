@@ -17,23 +17,19 @@ public class ExampleScene extends JGScene {
 
         float speed = 0.75f;
 
-        BlinkingSquare blink = new BlinkingSquare(0, 0, 75)
+        BlinkingSquare blink1 = new BlinkingSquare(0, 0, 75)
             .setColorOff(Color.MAGENTA)
             .setColorOn(Color.CYAN);
-
-        addChild(blink);
-
-        JGActionChain chain = new JGActionChain()
-            .addAction(new JGMoveTo(speed, new Point(75, 75)))
-            .addAction(new JGMoveTo(speed, new Point(0, 0)))
-            .addAction(new JGMoveTo(speed, new Point(75, 75)))
-            .addAction(new JGMoveTo(speed, new Point(0, 0)));
 
         BlinkingSquare blink2 = new BlinkingSquare(75, 75, 75)
             .setColorOff(Color.YELLOW)
             .setColorOn(Color.GREEN);
 
-        addChild(blink2);
+        JGActionChain chain1 = new JGActionChain()
+            .addAction(new JGMoveTo(speed, new Point(75, 75)))
+            .addAction(new JGMoveTo(speed, new Point(0, 0)))
+            .addAction(new JGMoveTo(speed, new Point(75, 75)))
+            .addAction(new JGMoveTo(speed, new Point(0, 0)));
 
         JGActionChain chain2 = new JGActionChain()
             .addAction(new JGMoveBy(speed, new Point(-75, -75)))
@@ -41,7 +37,10 @@ public class ExampleScene extends JGScene {
             .addAction(new JGMoveBy(speed, new Point(-75, -75)))
             .addAction(new JGMoveTo(speed, new Point(75, 0)));
 
-        blink.runAction(chain);
+        addChild(blink1);
+        addChild(blink2);
+
+        blink1.runAction(chain1);
         blink2.runAction(chain2);
     }
 
