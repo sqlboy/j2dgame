@@ -60,6 +60,8 @@ public class Game extends Canvas implements Runnable {
 
     public void update(double delta) {
 
+        sceneManager.getCurrentScene().update();
+
         JGObject go;
         for (Iterator<JGObject> iter =
                 sceneManager.getCurrentSceneObjects().iterator(); iter.hasNext();) {

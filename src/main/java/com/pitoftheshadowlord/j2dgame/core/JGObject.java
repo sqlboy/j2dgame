@@ -14,7 +14,7 @@ public class JGObject implements Comparable<JGObject>{
     private static int ID_SEQUENCE = 0;
     public final int id;
 
-    private final List<JGObject> children = Lists.newArrayList();
+    protected final List<JGObject> children = Lists.newArrayList();
 
     protected JGObject parent = null;
     protected RateLimiter rateLimit = RateLimiter.create(60);
