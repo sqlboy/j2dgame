@@ -29,13 +29,11 @@ public class AssetManager {
     public AssetManager() { }
 
     public BufferedImage getImage(String spritesheet, int frame) {
-        final String key = String.format("f:%s:%d", spritesheet, frame);
-        return cache.getIfPresent(key);
+        return cache.getIfPresent(buildKey(spritesheet, frame));
     }
 
     public BufferedImage getImage(String spritesheet, String name) {
-        final String key = String.format("n:%s:%s", spritesheet, name);
-        return cache.getIfPresent(key);
+        return cache.getIfPresent(buildKey(spritesheet, name));
     }
 
     public void preCache(String name, SpriteSheet sheet, boolean lazy) {
