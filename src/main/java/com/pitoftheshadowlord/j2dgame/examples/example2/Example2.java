@@ -2,13 +2,17 @@ package com.pitoftheshadowlord.j2dgame.examples.example2;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Point;
+import java.util.List;
+import java.util.Set;
 
+import com.google.common.collect.Sets;
 import com.pitoftheshadowlord.j2dgame.actions.JGActionChain;
+import com.pitoftheshadowlord.j2dgame.actions.JGDestroy;
 import com.pitoftheshadowlord.j2dgame.actions.JGMoveBy;
-import com.pitoftheshadowlord.j2dgame.actions.JGMoveTo;
 import com.pitoftheshadowlord.j2dgame.core.AssetManager;
+import com.pitoftheshadowlord.j2dgame.core.Dice;
 import com.pitoftheshadowlord.j2dgame.core.Game;
+import com.pitoftheshadowlord.j2dgame.core.JGObject;
 import com.pitoftheshadowlord.j2dgame.core.JGScene;
 import com.pitoftheshadowlord.j2dgame.core.JGSprite;
 import com.pitoftheshadowlord.j2dgame.core.SceneManager;
@@ -26,37 +30,49 @@ public class Example2  extends JGScene {
 
     public void load() {
 
-        float speed = 0.75f;
-        int size = 50;
-
         AssetManager assetManager = AssetManager.get();
         assetManager.preCache("bricks", new TileSpriteSheet("examples/bricks.png", 50), false);
 
-        JGSprite sprite1 = new JGSprite("bricks", 0, 0, 0);
-        JGSprite sprite2 = new JGSprite("bricks", 1, 50, 50);
+        for (int i=0; i<400; i=i+50) {
+            JGSprite sprite = new JGSprite("bricks", 0, i, 0);
+            addChild(sprite);
+        }
 
-        JGActionChain chain1 = new JGActionChain()
-            .addAction(new JGMoveTo(speed, new Point(size, size)))
-            .addAction(new JGMoveTo(speed, new Point(0, 0)))
-            .addAction(new JGMoveTo(speed, new Point(size, size)))
-            .addAction(new JGMoveTo(speed, new Point(0, 0)))
-            .addAction(new JGMoveTo(speed, new Point(0, getHeight() - size)))
-            .addAction(new JGMoveTo(speed, new Point(size, 0)));
+        for (int i=0; i<400; i=i+50) {
+            JGSprite sprite = new JGSprite("bricks", 1, i, 50);
+            addChild(sprite);
+        }
 
-        JGActionChain chain2 = new JGActionChain()
-            .addAction(new JGMoveBy(speed, new Point(-size, -size)))
-            .addAction(new JGMoveBy(speed, new Point(size, size)))
-            .addAction(new JGMoveBy(speed, new Point(-size, -size)))
-            .addAction(new JGMoveTo(speed, new Point(size, 0)))
-            .addAction(new JGMoveTo(speed, new Point(size, getHeight() - size)))
-            .addAction(new JGMoveTo(speed, new Point(0, 0)));
+        for (int i=0; i<400; i=i+50) {
+            JGSprite sprite = new JGSprite("bricks", 2, i, 100);
+            addChild(sprite);
+        }
 
-        addChild(sprite1);
-        addChild(sprite2);
-
-        sprite1.runAction(chain1);
-        sprite2.runAction(chain2);
+        rateLimit.setRate(1);
     }
+
+    Set<Integer> moved = Sets.newHashSet();
+
+    public void update() {
+
+        if (moved.size() >= children.size()) {
+            return;
+        }
+
+        int roll = Dice.roll(children.size()) - 1;
+        if (moved.contains(roll)) {
+            return;
+        }
+
+        if (rateLimit.tryAcquire()) {
+            JGObject child = children.get(roll);
+            JGActionChain action = new JGActionChain()
+                .addAction(new JGMoveBy(Dice.roll(3) + 3, 0, 500));
+            child.runAction(action);
+            moved.add(roll);
+        }
+    }
+
 
     public void render(Graphics g) {
         g.setColor(Color.black);
