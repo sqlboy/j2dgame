@@ -9,6 +9,7 @@ import com.google.common.collect.Sets;
 import com.pitoftheshadowlord.j2dgame.actions.JGActionChain;
 import com.pitoftheshadowlord.j2dgame.actions.JGDestroy;
 import com.pitoftheshadowlord.j2dgame.actions.JGMoveBy;
+import com.pitoftheshadowlord.j2dgame.actions.JGMoveTo;
 import com.pitoftheshadowlord.j2dgame.core.AssetManager;
 import com.pitoftheshadowlord.j2dgame.core.Dice;
 import com.pitoftheshadowlord.j2dgame.core.Game;
@@ -66,8 +67,11 @@ public class Example2  extends JGScene {
 
         if (rateLimit.tryAcquire()) {
             JGObject child = children.get(roll);
+
             JGActionChain action = new JGActionChain()
-                .addAction(new JGMoveBy(Dice.roll(3) + 3, 0, 500));
+                .addAction(new JGMoveTo(Dice.roll(3) + 3,
+                        child.getX(), getHeight() - child.getY() - child.getHeight()));
+
             child.runAction(action);
             moved.add(roll);
         }
