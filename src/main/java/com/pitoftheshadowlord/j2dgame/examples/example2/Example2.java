@@ -2,13 +2,10 @@ package com.pitoftheshadowlord.j2dgame.examples.example2;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.List;
 import java.util.Set;
 
 import com.google.common.collect.Sets;
 import com.pitoftheshadowlord.j2dgame.actions.JGActionChain;
-import com.pitoftheshadowlord.j2dgame.actions.JGDestroy;
-import com.pitoftheshadowlord.j2dgame.actions.JGMoveBy;
 import com.pitoftheshadowlord.j2dgame.actions.JGMoveTo;
 import com.pitoftheshadowlord.j2dgame.core.AssetManager;
 import com.pitoftheshadowlord.j2dgame.core.Dice;
