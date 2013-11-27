@@ -1,4 +1,4 @@
-package com.pitoftheshadowlord.j2dgame.examples.example1;
+package com.pitoftheshadowlord.j2dgame.examples;
 
 import java.awt.Color;
 import java.awt.Graphics;
