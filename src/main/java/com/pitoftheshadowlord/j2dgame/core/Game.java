@@ -45,6 +45,8 @@ public class Game extends Canvas implements Runnable {
         setIgnoreRepaint(true);
         setFocusable(false);
 
+        InputManager.get().addComponents(frame, this);
+
         thread = new Thread(this, title);
 
         initialize();
