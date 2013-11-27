@@ -105,9 +105,6 @@ public class JGObject implements Comparable<JGObject>{
     public void setPosition(int x, int y) {
         rect.setLocation(x, y);
     }
-    public void setPosition(float x, float y) {
-        rect.setLocation((int) x, (int)y);
-    }
 
     public void setPosition(Point p) {
         rect.setLocation(p);
