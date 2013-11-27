@@ -1,4 +1,4 @@
-package com.pitoftheshadowlord.j2dgame.examples.example2;
+package com.pitoftheshadowlord.j2dgame.examples.example1;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -67,7 +67,7 @@ public class Example2  extends JGScene {
             JGObject child = children.get(roll);
 
             JGActionChain action = new JGActionChain()
-                .addAction(new JGMoveBy(0.2f, 0, -10))
+                .addAction(new JGMoveBy(0.15f, 0, -5))
                 .addAction(new JGMoveTo(Dice.roll(3) + 3,
                         child.getX(), getHeight() - child.getY() - child.getHeight()));
 
