@@ -6,6 +6,7 @@ import java.awt.Transparency;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -22,40 +23,31 @@ public class AssetManager {
         return instance;
     }
 
-    private final Cache<String, BufferedImage> cache = CacheBuilder
-            .newBuilder().maximumSize(1000)
+    private final Cache<String, SpriteSheet> cache = CacheBuilder
+            .newBuilder().maximumSize(100)
             .build();
 
     public AssetManager() { }
 
     public BufferedImage getImage(String spritesheet, int frame) {
-        return cache.getIfPresent(buildKey(spritesheet, frame));
+        return cache.getIfPresent(spritesheet).getFrame(frame);
     }
 
     public BufferedImage getImage(String spritesheet, String name) {
-        return cache.getIfPresent(buildKey(spritesheet, name));
+        // TODO - redo.
+        return null;
+    }
+
+    public List<BufferedImage> getImages(String spritesheet) {
+        return cache.getIfPresent(spritesheet).getFrames();
     }
 
     public void preCache(String name, SpriteSheet sheet, boolean lazy) {
-        if (!lazy) {
-            int frame = 0;
-            for (BufferedImage image: sheet.getFrames()) {
-                cache.put(buildKey(name, frame), image);
-                ++frame;
-            }
-        }
+        cache.put(name, sheet);
     }
 
     public void precache(String  name, SpriteMap map, boolean lazy) {
 
-    }
-
-    public String buildKey(String spritesheet, int frame) {
-        return String.format("f:%s:%d", spritesheet, frame);
-    }
-
-    public String buildKey(String spritesheet, String name) {
-        return String.format("n:%s:%s", spritesheet, name);
     }
 
     public BufferedImage loadImage(String path) {
