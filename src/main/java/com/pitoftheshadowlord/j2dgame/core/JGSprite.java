@@ -15,11 +15,13 @@ public class JGSprite extends JGObject {
     public JGSprite(String sheet, int frame, int x, int y) {
         image = AssetManager.get().getImage(sheet, frame);
         this.setPosition(x, y);
+        this.setSize(image.getWidth(), image.getHeight());
     }
 
     public JGSprite(String sheet, String name, int x, int y) {
         image = AssetManager.get().getImage(sheet, name);
         this.setPosition(x, y);
+        this.setSize(image.getWidth(), image.getHeight());
     }
 
     public int getWidth() {
