@@ -5,8 +5,10 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.List;
+import java.util.Set;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.common.util.concurrent.RateLimiter;
 
 public class JGObject implements Comparable<JGObject>{
@@ -27,7 +29,6 @@ public class JGObject implements Comparable<JGObject>{
     public final Rectangle rect = new Rectangle(0, 0, 0, 0);
     public final Point renderOffset = new Point(0, 0);
 
-
     public JGObject() {
         id = ++ID_SEQUENCE;
     }
@@ -41,14 +42,6 @@ public class JGObject implements Comparable<JGObject>{
         this();
         rect.setLocation(x, y);
         rect.setSize(width, height);
-    }
-
-    public void render(Graphics g) {
-
-    }
-
-    public void update() {
-
     }
 
     public void runAction(JGAction action) {
@@ -178,6 +171,9 @@ public class JGObject implements Comparable<JGObject>{
         return zOrder - go.zOrder;
     }
 
+
+    public void render(Graphics g) { }
+    public void update() { }
     public void onShow() { }
     public void onHide() { }
     public void onDestroy() { }
