@@ -58,12 +58,23 @@ public class AssetManager {
             }
             return ImageIO.read(url);
         } catch (IOException e) {
-            throw new RuntimeException("Failed to find load: " + path);
+            throw new RuntimeException("Failed to find load: " + path, e);
         }
+    }
+
+    public BufferedImage loadAcceleratedImage(String path, int transparency) {
+        BufferedImage imageIn = loadImage(path);
+        BufferedImage imageOut = createtAcceleratedImage(imageIn.getWidth(), imageIn.getHeight(), transparency);
+        imageOut.getGraphics().drawImage(imageIn, 0, 0, null);
+        return imageOut;
     }
 
     public static final BufferedImage createtAcceleratedImage(int width, int height) {
         return getGraphicsConfig().createCompatibleImage(width, height, Transparency.BITMASK);
+    }
+
+    public static final BufferedImage createtAcceleratedImage(int width, int height, int transparent) {
+        return getGraphicsConfig().createCompatibleImage(width, height, transparent);
     }
 
     private static final GraphicsConfiguration getGraphicsConfig() {
