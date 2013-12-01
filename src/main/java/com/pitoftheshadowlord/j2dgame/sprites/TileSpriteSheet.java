@@ -23,7 +23,7 @@ public class TileSpriteSheet implements SpriteSheet {
 
     @Override
     public BufferedImage getFrame(int frame) {
-        final int row = frame / rows;
+        final int row = frame / cols;
         final int col = frame % cols;
 
         BufferedImage image =
