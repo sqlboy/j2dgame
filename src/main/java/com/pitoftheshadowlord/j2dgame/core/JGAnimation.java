@@ -55,7 +55,7 @@ public class JGAnimation extends JGObject {
         }
 
         ++frame;
-        if (frame >= frameCount - 1) {
+        if (frame >= frameCount) {
             if (oneShot) {
                 done = true;
                 return;
