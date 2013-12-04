@@ -107,28 +107,33 @@ public class Example5 extends JGScene {
 
         int xPos = 25;
         int spacing = 15;
-        for (int i=0; i<8; i++) {
+        for (int y=50; y<=100; y=y+50) {
+            xPos=25;
+            for (int i=0; i<8; i++) {
 
-            BlinkingSquare sprite = new BlinkingSquare(xPos, 50, 30);
-            sprite.addCollideListener(new JGCollideListener() {
+                BlinkingSquare sprite = new BlinkingSquare(xPos, y, 30);
+                sprite.addCollideListener(new JGCollideListener() {
 
-                @Override
-                public boolean collide(JGObject thisObject, JGObject otherObject) {
-                    if (!otherObject.isTagged("bullet")) {
-                        return false;
+                    @Override
+                    public boolean collide(JGObject thisObject, JGObject otherObject) {
+                        if (!otherObject.isTagged("bullet")) {
+                            return false;
+                        }
+
+                        BlinkingSquare bs = (BlinkingSquare) thisObject;
+                        bs.destroy = true;
+
+                        JGAnimation anim = new JGAnimation(
+                                AssetManager.get().getImages("explosion"), 1.0f, bs.getX()-5, bs.getY()-5).oneShot();
+                        addChild(anim);
+                        return true;
                     }
 
-                    BlinkingSquare bs = (BlinkingSquare) thisObject;
-                    bs.destroy = true;
-                    JGAnimation anim = new JGAnimation(
-                            AssetManager.get().getImages("explosion"), 1.0f, bs.getX()-5, bs.getY()-5).oneShot();
-                    addChild(anim);
-                    return true;
-                }
+                });
 
-            });
-            addChild(sprite);
-            xPos+=sprite.getWidth() + spacing;
+                addChild(sprite);
+                xPos+=sprite.getWidth() + spacing;
+            }
         }
     }
 
