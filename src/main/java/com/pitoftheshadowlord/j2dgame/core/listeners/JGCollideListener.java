@@ -15,6 +15,6 @@ public abstract class JGCollideListener {
         return this;
     }
 
-    public abstract void collide(JGObject thisObject, JGObject otherObject);
+    public abstract boolean collide(JGObject thisObject, JGObject otherObject);
 
 }

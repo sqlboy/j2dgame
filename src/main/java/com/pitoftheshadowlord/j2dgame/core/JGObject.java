@@ -207,9 +207,10 @@ public class JGObject implements Comparable<JGObject>{
     public void executeCollideListeners(JGObject other) {
         for (Iterator<JGCollideListener> iter = collideListeners.iterator(); iter.hasNext();) {
             JGCollideListener listener = iter.next();
-            listener.collide(this, other);
-            if (listener.isOneShot()) {
-                iter.remove();
+            if (listener.collide(this, other)) {
+                if (listener.isOneShot()) {
+                    iter.remove();
+                }
             }
         }
     }
