@@ -32,7 +32,7 @@ Move the box around the screen.  Exciting.
 
 
 **Collisions**  
-Fire bullets and boxes and watch them explode.
+Fire bullets at blinking boxes and watch them explode.
 
 ![Image Alt](https://raw.github.com/sqlboy/j2dgame/master/screenshots/example5.png)
 
