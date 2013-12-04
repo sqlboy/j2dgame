@@ -60,6 +60,7 @@ public class JGAnimation extends JGObject {
                 done = true;
                 return;
             }
+            frame = 0;
         }
     }
 
