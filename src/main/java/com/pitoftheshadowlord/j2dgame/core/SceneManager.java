@@ -1,10 +1,10 @@
 package com.pitoftheshadowlord.j2dgame.core;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
 import com.google.common.collect.Maps;
 
 
@@ -42,7 +42,7 @@ public class SceneManager {
         System.out.println("registering object: " + object + " " + objects.get(currentSceneName).size());
     }
 
-    public Collection<JGObject> getCurrentSceneObjects() {
+    public List<JGObject> getCurrentSceneObjects() {
         return objects.get(currentSceneName);
     }
 
