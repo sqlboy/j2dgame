@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 
@@ -20,6 +21,8 @@ public class SceneManager {
 
     private final Map<String, JGScene> scenes = Maps.newHashMap();
     private final Map<String, Class<? extends JGScene>> sceneClasses = Maps.newHashMap();
+
+    private final List<JGObject> queued = Lists.newArrayList();
 
     private static final SceneManager instance = new SceneManager();
 
@@ -37,13 +40,18 @@ public class SceneManager {
     }
 
     public void register(JGObject object) {
-        objects.get(currentSceneName).add(object);
-        Collections.sort(objects.get(currentSceneName));
+        queued.add(object);
         System.out.println("registering object: " + object + " " + objects.get(currentSceneName).size());
     }
 
     public List<JGObject> getCurrentSceneObjects() {
-        return objects.get(currentSceneName);
+
+        List<JGObject> currentSceneObjects = objects.get(currentSceneName);
+        if (currentSceneObjects.addAll(queued)) {
+            Collections.sort(currentSceneObjects);
+            queued.clear();
+        }
+        return currentSceneObjects;
     }
 
     public JGScene getCurrentScene() {
@@ -70,6 +78,7 @@ public class SceneManager {
                 objects.put(name, new ArrayList<JGObject>(32));
                 currentSceneName = name;
                 currentScene = scene;
+                queued.clear();
                 scene.load();
             } catch (Exception e) {
                 throw new RuntimeException("Failed to load scene: " + e.getMessage(), e);
