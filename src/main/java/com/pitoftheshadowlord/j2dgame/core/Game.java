@@ -64,9 +64,10 @@ public class Game extends Canvas implements Runnable {
 
         sceneManager.getCurrentScene().update();
 
+        final List<JGObject> objects = sceneManager.getCurrentSceneObjects();
+
         JGObject go;
-        for (Iterator<JGObject> iter =
-                sceneManager.getCurrentSceneObjects().iterator(); iter.hasNext();) {
+        for (Iterator<JGObject> iter = objects.iterator(); iter.hasNext();) {
 
             go = iter.next();
             if (go.destroy) {
@@ -83,6 +84,7 @@ public class Game extends Canvas implements Runnable {
                     JGAction action = actionIter.next();
                     if (action.isDone()) {
                         action.end();
+                        action.executeEndActionListeners();
                         actionIter.remove();
                         continue;
                     }

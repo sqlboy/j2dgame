@@ -1,10 +1,18 @@
 package com.pitoftheshadowlord.j2dgame.core;
 
+import java.util.List;
+
+import com.google.common.collect.Lists;
+import com.pitoftheshadowlord.j2dgame.core.listeners.JGActionListener;
+import com.pitoftheshadowlord.j2dgame.core.listeners.JGEndActionListener;
+
 public abstract class JGAction {
 
     protected boolean paused;
     protected boolean done;
     protected JGObject target;
+
+    private List<JGActionListener> endActionListeners = Lists.newArrayList();
 
     public JGAction() { }
 
@@ -34,5 +42,16 @@ public abstract class JGAction {
 
     public void resume() {
         paused = false;
+    }
+
+    public JGAction addEndActionListener(JGEndActionListener listener) {
+        endActionListeners.add(listener);
+        return this;
+    }
+
+    public void executeEndActionListeners() {
+        for (JGActionListener listener: endActionListeners) {
+            listener.actionPerformed(this);
+        }
     }
 }
