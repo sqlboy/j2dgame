@@ -98,6 +98,7 @@ public class Example5 extends JGScene {
     private void loadBulletCache() {
         for (int i=0; i<10; i++) {
             Bullet b = new Bullet(-10, 0);
+            b.visible = false;
             addChild(b);
             bulletCache.add(b);
         }
@@ -119,6 +120,9 @@ public class Example5 extends JGScene {
                         if (!otherObject.isTagged("bullet")) {
                             return false;
                         }
+
+                        otherObject.cancelAllActions();
+                        otherObject.visible = false;
 
                         BlinkingSquare bs = (BlinkingSquare) thisObject;
                         bs.destroy = true;
@@ -168,7 +172,9 @@ public class Example5 extends JGScene {
 
     private void fireBullet() {
         Bullet b = bulletCache.remove(0);
+
         b.setPosition(player.getX() + player.getWidth() / 2, player.getY() - 10);
+        b.visible = true;
 
         float speed = 0.8f * (player.getY() / 400.0f);
         JGAction a = new JGMoveBy(speed, 0, (player.getY() * -1) - 32);
@@ -176,7 +182,8 @@ public class Example5 extends JGScene {
         a.addEndActionListener(new JGEndActionListener() {
             @Override
             public void actionPerformed(JGAction action) {
-                bulletCache.add((Bullet)action.getTarget());
+                Bullet bullet = (Bullet)action.getTarget();
+                bulletCache.add(bullet);
             }
         });
         b.runAction(a);
