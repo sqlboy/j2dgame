@@ -4,12 +4,14 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.common.util.concurrent.RateLimiter;
+import com.pitoftheshadowlord.j2dgame.core.listeners.JGCollideListener;
 
 public class JGObject implements Comparable<JGObject>{
 
@@ -17,12 +19,12 @@ public class JGObject implements Comparable<JGObject>{
     public final int id;
 
     protected final List<JGObject> children = Lists.newArrayList();
-
     protected JGObject parent = null;
     protected RateLimiter rateLimit = RateLimiter.create(60);
 
-    public int zOrder = 0;
+    private final List<JGCollideListener> collideListeners = Lists.newArrayList();
 
+    public int zOrder = 0;
     public boolean visible = true;
     public boolean destroy = false;
 
@@ -168,6 +170,10 @@ public class JGObject implements Comparable<JGObject>{
         return other.contains(rect.x - renderOffset.x, rect.y - renderOffset.y, rect.width, rect.height);
     }
 
+    public boolean intersects(JGObject other) {
+        return this.rect.intersects(other.rect);
+    }
+
     @Override
     public int compareTo(JGObject go) {
         return zOrder - go.zOrder;
@@ -189,11 +195,28 @@ public class JGObject implements Comparable<JGObject>{
         this.tags.add(tag);
     }
 
+    public JGObject addCollideListener(JGCollideListener listener) {
+        collideListeners.add(listener);
+        return this;
+    }
+
+    public boolean isCollidable() {
+        return !collideListeners.isEmpty();
+    }
+
+    public void executeCollideListeners(JGObject other) {
+        for (Iterator<JGCollideListener> iter = collideListeners.iterator(); iter.hasNext();) {
+            JGCollideListener listener = iter.next();
+            listener.collide(this, other);
+            if (listener.isOneShot()) {
+                iter.remove();
+            }
+        }
+    }
+
     public void render(Graphics g) { }
     public void update() { }
     public void onShow() { }
     public void onHide() { }
     public void onDestroy() { }
-
-
 }

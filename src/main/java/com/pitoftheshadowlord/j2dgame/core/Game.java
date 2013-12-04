@@ -94,6 +94,20 @@ public class Game extends Canvas implements Runnable {
                 }
             }
             go.update();
+
+            if (!go.isCollidable()) {
+                continue;
+            }
+
+            for (JGObject other: objects) {
+                if (other.id == go.id) {
+                    continue;
+                }
+                if (go.intersects(other)) {
+                    go.executeCollideListeners(other);
+                }
+            }
+
         }
     }
 
