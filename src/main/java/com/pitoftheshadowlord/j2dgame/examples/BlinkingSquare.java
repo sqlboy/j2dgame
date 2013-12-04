@@ -7,13 +7,13 @@ import com.pitoftheshadowlord.j2dgame.core.JGObject;
 
 public class BlinkingSquare extends JGObject {
 
-    private Color colorOn = new Color(255, 255, 255);
-    private Color colorOff = new Color(0, 0, 0);
+    public Color colorOn = new Color(255, 255, 255);
+    public Color colorOff = new Color(0, 0, 0);
     private Color color = colorOff;
 
     public BlinkingSquare(int x, int y, int size) {
         super(x, y, size, size);
-        rateLimit.setRate(5);
+        rateLimit.setRate(1.2);
     }
 
     public BlinkingSquare setColorOn(Color c) {
