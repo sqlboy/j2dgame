@@ -29,6 +29,8 @@ public class JGObject implements Comparable<JGObject>{
     public final Rectangle rect = new Rectangle(0, 0, 0, 0);
     public final Point renderOffset = new Point(0, 0);
 
+    private Set<String> tags = Sets.newHashSet();
+
     public JGObject() {
         id = ++ID_SEQUENCE;
     }
@@ -171,10 +173,27 @@ public class JGObject implements Comparable<JGObject>{
         return zOrder - go.zOrder;
     }
 
+    public Set<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<String> tags) {
+        this.tags = tags;
+    }
+
+    public boolean isTagged(String tag) {
+        return this.tags.contains(tag);
+    }
+
+    public void addTag(String tag) {
+        this.tags.add(tag);
+    }
 
     public void render(Graphics g) { }
     public void update() { }
     public void onShow() { }
     public void onHide() { }
     public void onDestroy() { }
+
+
 }
