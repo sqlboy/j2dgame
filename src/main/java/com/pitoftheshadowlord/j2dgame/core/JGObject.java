@@ -52,6 +52,13 @@ public class JGObject implements Comparable<JGObject>{
         ActionManager.get().runAction(this, action);
     }
 
+    public void cancelAllActions() {
+        for (JGAction action: ActionManager.get().getActions(this)) {
+            action.cancel();
+        }
+    }
+
+
     public List<JGObject> getChildren() {
         return children;
     }
