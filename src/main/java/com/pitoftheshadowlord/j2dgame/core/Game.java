@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import javax.swing.JFrame;
 
@@ -80,7 +79,7 @@ public class Game extends Canvas implements Runnable {
 
             List<JGAction> actions = actionManager.getActions(go);
             if (actions != null) {
-                for (ListIterator<JGAction> actionIter = actions.listIterator(); actionIter.hasNext();) {
+                for (Iterator<JGAction> actionIter = actions.iterator(); actionIter.hasNext();) {
                     JGAction action = actionIter.next();
                     if (action.isDone()) {
                         action.end();
